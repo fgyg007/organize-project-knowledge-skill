@@ -1,0 +1,4 @@
+interface:
+  display_name: "Organize Project Knowledge"
+  short_description: "Turn messy project docs into one reliable system"
+  default_prompt: "Use $organize-project-knowledge to audit and reorganize this project’s state, history, plans, tests, evidence, and storage boundaries."
