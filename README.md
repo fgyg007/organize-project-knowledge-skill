@@ -26,6 +26,8 @@ The skill guides Codex to:
 - back up and hash documentation before large reorganizations;
 - verify results with file counts, SHA-256, link checks, duplicate checks, secret scans, and scoped Git diffs;
 - maintain project knowledge when meaningful events happen rather than creating arbitrary monthly files.
+- create a resumable checkpoint for unfinished work without turning it into a second project-memory authority;
+- restore a paused task by validating the checkpoint against current repository and external state.
 
 This is a project-knowledge and evidence-management skill. It is not a sprint planner, issue tracker, or replacement for project-specific technical tests.
 
@@ -76,6 +78,18 @@ Use $organize-project-knowledge to back up this documentation, implement the app
 Use $organize-project-knowledge to explain what we tested before, what remains untested, which checks belong to AI or the platform, and which checks require a human checklist.
 ```
 
+Save unfinished work for another session or agent:
+
+```text
+Use $organize-project-knowledge to save a resumable checkpoint for this unfinished task, including verified work, unresolved issues, and the exact next action.
+```
+
+Resume from a checkpoint:
+
+```text
+Use $organize-project-knowledge to restore the latest checkpoint, reconcile it with current repository state, and tell me the next action before continuing.
+```
+
 Codex may also select the skill automatically when a request matches its description.
 
 ## Audit mode and implementation mode
@@ -98,6 +112,7 @@ State the mode in your prompt when you want to prevent or authorize changes.
 | Pending human tests | Checkbox-oriented black-box acceptance work for a person. |
 | Acceptance records | Dated results from AI, platform, and human testing with evidence. |
 | Archives | Historical material that is no longer a current entry point. |
+| Work checkpoints | Temporary recovery pointers for unfinished tasks; never a replacement for current project memory or append-only history. |
 
 The private workspace and Git repository do not need the same structure. The skill defines authority, allowed synchronization, sync direction, and private boundaries instead of blindly mirroring folders.
 
@@ -108,6 +123,7 @@ The private workspace and Git repository do not need the same structure. The ski
 - Do not delete or compress historical material before creating and verifying a recoverable backup.
 - Do not overwrite unrelated user changes or include them in a cleanup commit.
 - Do not call files duplicates based only on similar filenames; compare hashes and meaning.
+- Do not copy full logs, conversations, or secrets into work checkpoints; link to authoritative evidence.
 
 ## Repository structure
 
@@ -136,6 +152,7 @@ organize-project-knowledge/
 - 不清楚以前测过什么、现在要测什么、由 AI 还是人工来测；
 - 私有工作区、NAS 和 Git 被误当成必须完全镜像的目录；
 - 整理完成后只有“看起来整齐”，没有备份、哈希、链接或重复项检查作为证据。
+- 任务中途暂停或换 AI 工具时，没有可验证、可恢复的工作检查点。
 
 ### 安装
 
@@ -184,6 +201,12 @@ git -C ~/.agents/skills/organize-project-knowledge pull --ff-only
 使用 $organize-project-knowledge 梳理这个项目以前测过什么、以后要测什么；把 AI/平台可执行测试、人工黑盒 Checklist 和包含证据的验收记录分开。
 ```
 
+保存或恢复未完成任务：
+
+```text
+使用 $organize-project-knowledge 为当前未完成任务保存上下文检查点，记录已验证结果、未解决问题和下一条可执行动作。
+```
+
 ### 它遵循的核心规则
 
 1. 先扫描整个项目，再处理局部文件。
@@ -194,5 +217,6 @@ git -C ~/.agents/skills/organize-project-knowledge pull --ff-only
 6. 私有工作区与 Git 不必目录一致，但必须明确权威归属、同步白名单和隐私边界。
 7. 大规模整理前先做可恢复备份，并记录路径、大小和 SHA-256。
 8. 用真实事件维护文档，不在开发阶段机械地按月份拆分。
+9. 上下文检查点只是未完成任务的临时恢复指针；任务完成后将事实合并回项目记忆和历史，再归档检查点。
 
 完整的执行规则见 [SKILL.md](SKILL.md)。

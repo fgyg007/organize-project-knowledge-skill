@@ -1,6 +1,6 @@
 ---
 name: organize-project-knowledge
-description: Audit and reorganize messy project documentation into a reliable operating system with explicit sources of truth, current state, append-only history, roadmap, technical debt, test ownership, pending human checklists, acceptance records, archives, backups, and storage boundaries. Use for project-wide documentation cleanup, duplicate or conflicting files, unclear “what was done vs what remains,” private-workspace versus Git/public-repository governance, test and acceptance redesign, or requests such as “整理项目文档”, “项目记忆”, “以前测了什么”, and “以后要测什么”.
+description: Audit and reorganize project documentation into a reliable operating system with explicit sources of truth, current state, append-only history, roadmap, technical debt, test ownership, acceptance records, archives, backups, storage boundaries, and resumable work checkpoints. Use for project-wide documentation cleanup, duplicate or conflicting files, unclear “what was done vs what remains,” private versus public documentation governance, test and acceptance redesign, or requests to save context, hand work to another agent, resume a paused project, 整理项目文档, 项目记忆, 以前测了什么, or 以后要测什么.
 ---
 
 # Organize Project Knowledge
@@ -129,6 +129,42 @@ Run checks proportional to the change and record the findings:
 - Git status and diff limited to the intended scope.
 
 Do not claim that a feature passed merely because a procedure exists or a checklist is present. Acceptance requires a dated result and attributable evidence.
+
+### 7. Manage Resumable Work Checkpoints
+
+Use a checkpoint only for an unfinished task that must pause, cross sessions, or transfer to another agent. Do not create checkpoints as a routine diary or as another project-memory authority.
+
+Before writing one, identify the project’s existing current-state authority and preferred pending-work location. Reuse an existing active checkpoint for the same task instead of creating a competing file.
+
+Record only actionable recovery context:
+
+- checkpoint date and status;
+- current objective, scope, and explicit exclusions;
+- repository, branch, commit, environment, and relevant version when applicable;
+- completed work and material decisions;
+- files changed or authoritative documents updated;
+- verification commands, outcomes, and evidence locations;
+- unresolved issues, failed hypotheses, blockers, and risks;
+- exact next action;
+- files or entry points to read first when resuming.
+
+Do not copy full logs, whole conversations, secrets, or long project history into a checkpoint. Link to authoritative evidence instead.
+
+When resuming:
+
+1. verify that the repository, files, external state, and assumptions still match the checkpoint;
+2. reconcile changes made since the checkpoint;
+3. state the recovered objective and next action;
+4. continue from current evidence rather than blindly replaying old commands.
+
+When the task finishes:
+
+1. update the current-state authority with what is now true;
+2. append meaningful decisions and verified completion to project history;
+3. move final tests into acceptance records when applicable;
+4. mark the checkpoint completed and archive or remove it according to project policy.
+
+The checkpoint is a temporary recovery pointer. Project memory remains the authority for current truth, and project history remains the authority for completed decisions.
 
 ## Maintain by Events, Not Calendar Ritual
 
